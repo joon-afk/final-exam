@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>소개</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #222222;
+      transition: all 0.5s ease;
+    }
+
+    /* 사진에 마우스 올렸을 때 부드럽게 확대 */
+    #profile-image {
+      transition: transform 0.5s ease;
+      border-radius: 9999px; /* 둥근 원형 */
+    }
+    #profile-link:hover #profile-image {
+      transform: scale(1.1);
+    }
+
+    /* 오른쪽 아래 고정 네모 박스 스타일 */
+    .fixed-boxes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .fixed-box {
+      width: 60px;
+      height: 60px;
+      background-color: #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fixed-box:hover {
+      transform: scale(1.2);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .fixed-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+  <!-- Header -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 transition-all p-5 shadow">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">MyPortfolio</h1>
+      <nav class="hidden md:flex gap-6 text-gray-700 dark:text-gray-300 font-medium">
+        <a href="index.html" class="hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+        <a href="Team.html" class="hover:text-blue-500 dark:hover:text-blue-400">Team</a>
+        <a href="about.html" class="hover:text-blue-500 dark:hover:text-blue-400">About</a>
+      </nav>
+      <!-- 다크모드 토글 버튼 -->
+      <button id="darkToggle" aria-label="Toggle Dark Mode"
+        class="ml-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+        다크모드
+      </button>
+    </div>
+  </header>
+
+  <!-- 헤더 높이만큼 공간 확보 -->
+  <div class="h-20"></div>
+
+  <!-- About Me Section -->
+  <section id="about" class="py-32 bg-white dark:bg-gray-900">
+    <div class="max-w-5xl mx-auto bg-gray-50 dark:bg-gray-800 p-12 rounded-2xl shadow-lg transition transform hover:scale-105 duration-500">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-10">
+
+        <!-- 사진 박스 (링크 포함) -->
+        <a id="profile-link" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 w-52 h-52 md:w-60 md:h-60 rounded-full overflow-hidden shadow-lg border-4 border-blue-300 dark:border-blue-600">
+          <img id="profile-image" alt="Profile Photo" class="w-full h-full object-cover"/>
+        </a>
+
+        <!-- 텍스트 박스 -->
+        <div class="text-center md:text-left flex-1">
+          <h2 class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-6" id="profile-title"></h2>
+          <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4" id="profile-description"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-800 py-6 text-center border-t border-gray-200 dark:border-gray-700">
+    <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 MyPortfolio. </p>
+  </footer>
+
+  <!-- 오른쪽 아래 고정 네모 박스 세 개 (사진 + 링크) -->
+  <div class="fixed-boxes">
+    <a href="https://www.joongbu.ac.kr/" target="_blank" rel="noopener noreferrer" class="fixed-box" title="Box 1">
+      <img src="jb.png" alt="Box 1 Image" />
+    </a>
+    <a href="https://www.instagram.com/won_joon_04/" target="_blank" rel="noopener noreferrer" class="fixed-box" title="Box 2">
+      <img src="in.png" alt="Box 2 Image" />
+    </a>
+    <a href="https://github.com/joon-afk" target="_blank" rel="noopener noreferrer" class="fixed-box" title="Box 3">
+      <img src="git.png" alt="Box 3 Image" />
+    </a>
+  </div>
+
+  <script>
+    // 객체 생성
+    const profileData = {
+      name: "소개",
+      description: "중부대학교 정보보학전공.<br>이름: 이원준.<br>생년원일: 2004,04,02.<br>연락처:010-4841-6929",
+      imageUrl: "asd.jpg",
+      link: "https://github.com/joon-afk"
+    };
+
+    // 객체 데이터를 화면에 삽입
+    document.getElementById('profile-title').innerText = profileData.name;
+    document.getElementById('profile-description').innerHTML = profileData.description;
+    document.getElementById('profile-image').src = profileData.imageUrl;
+    document.getElementById('profile-link').href = profileData.link;
+
+
+    // 다크모드 토글 기능
+    const darkToggle = document.getElementById('darkToggle');
+    darkToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      if(document.documentElement.classList.contains('dark')){
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // 페이지 로드 시 저장된 테마 적용
+    window.addEventListener('DOMContentLoaded', () => {
+      if(localStorage.getItem('theme') === 'dark'){
+        document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+
+</body>
+</html>

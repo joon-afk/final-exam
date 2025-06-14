@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team 소개</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #222222;
+      transition: all 0.5s ease;
+    }
+
+    .profile-img {
+      transition: transform 0.5s ease;
+      border-radius: 9999px;
+    }
+    .profile-link:hover .profile-img {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+  <!-- Header -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 transition-all p-5 shadow">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">MyPortfolio</h1>
+      <nav class="hidden md:flex gap-6 text-gray-700 dark:text-gray-300 font-medium">
+        <a href="index.html" class="hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+        <a href="about.html" class="hover:text-blue-500 dark:hover:text-blue-400">About</a>
+        <a href="team.html" class="hover:text-blue-500 dark:hover:text-blue-400">Team</a>
+        <a href="" class="hover:text-blue-500 dark:hover:text-blue-400">Team project</a>
+      </nav>
+      <!-- 다크모드 토글 버튼 -->
+      <button id="darkToggle" aria-label="Toggle Dark Mode"
+        class="ml-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+        다크모드
+      </button>
+    </div>
+  </header>
+
+  <!-- 헤더 높이만큼 공간 확보 -->
+  <div class="h-20"></div>
+
+  <!-- 팀원 소개 섹션 -->
+  <section id="team" class="py-32 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-16">팀원 소개</h2>
+
+      <div id="team-container" class="grid grid-cols-1 md:grid-cols-3 gap-12"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-800 py-6 text-center border-t border-gray-200 dark:border-gray-700">
+    <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 MyPortfolio.</p>
+  </footer>
+
+  <script>
+    // 팀원 정보 객체 배열
+    const teamMembers = [
+      {
+        name: "곽남호",
+        role: "학번: 92212697<br>연락처: 010-7454-3904",
+        image: "kwak.png",
+        link: "https://github.com/KwakNamHo"
+      },
+      {
+        name: "김태빈",
+        role: "학번: 92212790<br>연락처: 010-7221-7727",
+        image: "tae.png",
+        link: "https://github.com/taebin327"
+      },
+      {
+        name: "김민우",
+        role: "학번: 92212752<br>연락처: 010-8700-9404",
+        image: "kim.png",
+        link: "https://github.com/vmaca123"
+      }
+    ];
+
+    // HTML 동적 생성
+    const container = document.getElementById("team-container");
+
+    teamMembers.forEach(member => {
+      const memberCard = `
+        <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl shadow-lg transition hover:scale-105 duration-500">
+          <a href="${member.link}" target="_blank" rel="noopener noreferrer" class="profile-link block mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-blue-300 dark:border-blue-600 shadow-lg">
+            <img src="${member.image}" alt="${member.name}" class="w-full h-full object-cover profile-img"/>
+          </a>
+          <h3 class="text-2xl font-bold mt-6 mb-3">${member.name}</h3>
+          <p class="text-gray-700 dark:text-gray-300">${member.role}</p>
+        </div>`;
+      container.innerHTML += memberCard;
+    });
+
+    // 다크모드 토글 기능
+    const darkToggle = document.getElementById('darkToggle');
+    darkToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      if(document.documentElement.classList.contains('dark')){
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // 페이지 로드 시 저장된 테마 적용
+    window.addEventListener('DOMContentLoaded', () => {
+      if(localStorage.getItem('theme') === 'dark'){
+        document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+
+</body>
+</html>
